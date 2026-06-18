@@ -1,0 +1,321 @@
+:root {
+    --bg-page-color: #14161a;
+    --bg-nav-color: #1c1f25;
+    --bg-column-color: #1a1d23;
+    --bg-task-color: #232730;
+    --bg-button-color: #5b6cff;
+    --bg-button-hover: #4756e0;
+    --primary-text-color: #e8e9ed;
+    --secondary-text-color: #9a9ea8;
+    --border-color: #2d3139;
+    --danger-color: #e0566f;
+
+    --padding-s: 8px;
+    --padding-m: 12px;
+    --padding-l: 20px;
+    --padding-xl: 28px;
+    --padding-xxl: 36px;
+
+    --border-radius-s: 6px;
+    --border-radius-m: 10px;
+    --border-radius-l: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-page-color);
+    color: var(--primary-text-color);
+    font-family: "Segoe UI", Roboto, -apple-system, sans-serif;
+}
+
+/* ---------- NAV ---------- */
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--bg-nav-color);
+    padding: var(--padding-l) var(--padding-xl);
+    border-bottom: 1px solid var(--border-color);
+}
+
+nav .left {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+nav .right button {
+    background-color: var(--bg-button-color);
+    color: var(--primary-text-color);
+    border: none;
+    outline: none;
+    padding: var(--padding-m) var(--padding-l);
+    border-radius: var(--border-radius-m);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+nav .right button:hover {
+    background-color: var(--bg-button-hover);
+    transform: translateY(-1px);
+}
+
+/* ---------- BOARD ---------- */
+
+section.board {
+    display: flex;
+    gap: var(--padding-l);
+    padding: var(--padding-xl);
+    align-items: flex-start;
+}
+
+.task-column {
+    background-color: var(--bg-column-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-l);
+    flex: 1;
+    min-width: 280px;
+    padding: var(--padding-l);
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-m);
+    min-height: 60vh;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.task-column.hover-over {
+    border: 2px dashed var(--bg-button-color);
+    transform: scale(1.02);
+}
+
+.task-column .heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: var(--padding-m);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.task-column .heading .left {
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--secondary-text-color);
+}
+
+.task-column .heading .right {
+    font-size: 13px;
+    color: var(--secondary-text-color);
+    background-color: var(--bg-task-color);
+    padding: 4px var(--padding-m);
+    border-radius: var(--border-radius-s);
+}
+
+.task-column .heading .right .count {
+    color: var(--primary-text-color);
+    font-weight: 600;
+}
+
+/* ---------- TASK CARD ---------- */
+
+.task {
+    background-color: var(--bg-task-color);
+    border-radius: var(--border-radius-m);
+    padding: var(--padding-m) var(--padding-l);
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-s);
+    cursor: grab;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.task:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+    transform: translateY(-2px);
+}
+
+.task:active {
+    cursor: grabbing;
+}
+
+.task.dragging {
+    opacity: 0.5;
+}
+
+.task h2 {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.task p {
+    font-size: 13px;
+    color: var(--secondary-text-color);
+    line-height: 1.4;
+}
+
+.task .delete-btn {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--danger-color);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 4px var(--padding-s);
+    border-radius: var(--border-radius-s);
+    transition: background-color 0.15s ease;
+}
+
+.task .delete-btn:hover {
+    background-color: rgba(224, 86, 111, 0.12);
+}
+
+/* ---------- DUE DATE BADGE ---------- */
+
+.task-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2px;
+}
+
+.due-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px var(--padding-s);
+    border-radius: var(--border-radius-s);
+    letter-spacing: 0.2px;
+}
+
+/* upcoming: due more than 24hrs away */
+.due-badge.upcoming {
+    background-color: rgba(91, 108, 255, 0.15);
+    color: #8d97ff;
+}
+
+/* due soon: within 24hrs */
+.due-badge.due-soon {
+    background-color: rgba(230, 175, 46, 0.15);
+    color: #e6af2e;
+}
+
+/* overdue: past due date */
+.due-badge.overdue {
+    background-color: rgba(224, 86, 111, 0.15);
+    color: var(--danger-color);
+}
+
+.task.overdue {
+    border: 1px solid rgba(224, 86, 111, 0.4);
+}
+
+.task.due-soon {
+    border: 1px solid rgba(230, 175, 46, 0.35);
+}
+
+/* ---------- MODAL ---------- */
+
+.modal {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal .bg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    z-index: 1;
+}
+
+.modal .center {
+    background-color: var(--bg-column-color);
+    border: 1px solid var(--border-color);
+    padding: var(--padding-xxl);
+    border-radius: var(--border-radius-l);
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-l);
+    width: 380px;
+    z-index: 10;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.modal .center input,
+.modal .center textarea,
+.modal .center select {
+    background-color: var(--bg-task-color);
+    border: 1px solid var(--border-color);
+    outline: none;
+    color: var(--primary-text-color);
+    padding: var(--padding-m);
+    border-radius: var(--border-radius-s);
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.modal .center .due-date-label {
+    font-size: 12px;
+    color: var(--secondary-text-color);
+    margin-bottom: calc(var(--padding-s) * -1);
+}
+
+.modal .center textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.modal .center input:focus,
+.modal .center textarea:focus {
+    border-color: var(--bg-button-color);
+}
+
+.modal .center button {
+    background-color: var(--bg-button-color);
+    border: none;
+    outline: none;
+    color: var(--primary-text-color);
+    padding: var(--padding-m) var(--padding-l);
+    cursor: pointer;
+    border-radius: var(--border-radius-m);
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.15s ease;
+}
+
+.modal .center button:hover {
+    background-color: var(--bg-button-hover);
+}
+
+.modal .center .cancel-task-btn {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--secondary-text-color);
+}
+
+.modal .center .cancel-task-btn:hover {
+    background-color: var(--bg-task-color);
+    color: var(--primary-text-color);
+}
