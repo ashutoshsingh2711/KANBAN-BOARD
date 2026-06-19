@@ -48,7 +48,7 @@ Kanban-Board/
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/kanban-board.git
+git clone https://github.com/ashutoshsingh2711/kanban-board.git
 ```
 
 2. Navigate to the project directory:
